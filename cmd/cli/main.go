@@ -1,13 +1,62 @@
+// Copyright (c) 2021 rookie-ninja
+//
+// Use of this source code is governed by an Apache-style
+// license that can be found in the LICENSE file.
+
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"context"
+	"fmt"
+	"net/http"
 
+	"github.com/gin-gonic/gin"
+	rkboot "github.com/rookie-ninja/rk-boot/v2"
+	rkgin "github.com/rookie-ninja/rk-gin/v2/boot"
+)
+
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample rk-demo server.
+// @termsOfService http://swagger.io/terms/
+
+// @securityDefinitions.basic BasicAuth
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+	// Create a new boot instance.
+	boot := rkboot.NewBoot()
+
+	// Register handler
+	entry := rkgin.GetGinEntry("rk-demo")
+	entry.Router.GET("/v1/greeter", Greeter)
+
+	// Bootstrap
+	boot.Bootstrap(context.TODO())
+
+	boot.WaitForShutdownSig(context.TODO())
+}
+
+// Greeter handler
+// @Summary Greeter
+// @Id 1
+// @Tags Hello
+// @version 1.0
+// @Param name query string true "name"
+// @produce application/json
+// @Success 200 {object} GreeterResponse
+// @Router /v1/greeter [get]
+func Greeter(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, &GreeterResponse{
+		Message: fmt.Sprintf("Hello %s!", ctx.Query("name")),
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+type GreeterResponse struct {
+	Message string
 }
