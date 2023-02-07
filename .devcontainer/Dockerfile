@@ -14,6 +14,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # [Optional] Uncomment the next lines to use go get to install anything else you need
 # USER vscode
+# install swag tools - https://github.com/swaggo/swag
+RUN go install github.com/swaggo/swag/cmd/swag@latest
 # RUN go get -x <your-dependency-or-tool>
 
 # [Optional] Uncomment this line to install global node packages.

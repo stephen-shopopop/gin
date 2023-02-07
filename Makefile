@@ -78,6 +78,9 @@ test:	## tests
 run: ## run
 	$(GORUN) ./cmd/cli
 
+swagger: ## swagger auto-generate
+	@swag init --dir ./cmd/cli 
+
 build: ## build binary
 	$(GOBUILD) -o $(BUILD_DIR)/$(SERVICE) ./cmd/cli
 

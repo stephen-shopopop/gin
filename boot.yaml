@@ -1,18 +1,41 @@
 # boot.yaml
+app:
+  name: web-service
+  version: "v1.0.0"
+  description: "Service web server"
+  keywords: ["web-service", "golang"]
+  homeUrl: "http://example.com"
+  docsUrl: ["http://example.com"]
+  maintainers: ["@stephendltg"]
 gin:
-  - name: rk-demo
+  - name: web-service
     port: 8080
     enabled: true
     commonService:
       enabled: true
+      pathPrefix: "healthcheck/v1"
     sw:
       enabled: true
+      jsonPath: ""
+      path: "openapi"
+      headers: []
     docs:
       enabled: true
     prom:
       enabled: true
     middleware:
+      auth:
+        enabled: true
+        apiKey: ["token"]
+        ignore: ["/openapi", "/docs", "/healthcheck/v1/info"]
       logging:
         enabled: true
+      meta:
+        enabled: true
+        prefix: "Service"
       prom:
+        enabled: true
+      secure:
+        enabled: true
+      csrf:
         enabled: true

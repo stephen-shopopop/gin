@@ -20,6 +20,14 @@
 go run ./cmd/cli
 ```
 
+Swagger - [swag](https://github.com/swaggo/swag)
+
+```bash
+// go install github.com/swaggo/swag/cmd/swag@latest
+
+swag init --dir ./cmd/cli 
+```
+
 ### Make (linux/darwin)
 
 ```bash

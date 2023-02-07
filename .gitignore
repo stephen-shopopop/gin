@@ -5,6 +5,7 @@
 build
 coverage
 vendor
+docs/docs.go
 
 # Binaries for programs and plugins
 *.exe
