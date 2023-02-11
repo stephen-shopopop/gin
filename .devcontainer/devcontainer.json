@@ -2,19 +2,9 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/go
 {
 	"name": "Go",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update the VARIANT arg to pick a version of Go: 1, 1.19, 1.18
-			// Append -bullseye or -buster to pin to an OS version.
-			// Use -bullseye variants on local arm64/Apple Silicon.
-			"VARIANT": "1.19",
-			// Options
-			"NODE_VERSION": "lts/*"
-		}
-	},
-	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -30,7 +20,10 @@
 			"extensions": [
 				"golang.Go",
     		"ethan-reesor.vscode-go-test-adapter",
-				"mutantdino.resourcemonitor"
+				"mutantdino.resourcemonitor",
+				"cweijan.vscode-mysql-client2",
+				"rangav.vscode-thunder-client",
+				"redhat.vscode-yaml"
 			]
 		}
 	},

@@ -2,6 +2,9 @@
   "recommendations": [
     "golang.Go",
     "ethan-reesor.vscode-go-test-adapter",
-    "mutantdino.resourcemonitor"
+    "mutantdino.resourcemonitor",
+    "cweijan.vscode-mysql-client2",
+    "rangav.vscode-thunder-client",
+    "redhat.vscode-yaml"
   ]
 }

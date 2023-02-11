@@ -27,7 +27,7 @@ gin:
       auth:
         enabled: true
         apiKey: ["token"]
-        ignore: ["/openapi", "/docs", "/healthcheck/v1/info"]
+        ignore: ["/openapi", "/docs", "/metrics", "/healthcheck/v1/info"]
       logging:
         enabled: true
       meta:
