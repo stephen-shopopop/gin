@@ -2,8 +2,8 @@ version: '3.8'
 
 volumes:
   postgres-data:
-  prometheus-data:
-  grafana-data:
+  # prometheus-data:
+  # grafana-data:
 
 services:
   app:
@@ -30,7 +30,7 @@ services:
     command: sleep infinity
 
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    # network_mode: service:db
+    network_mode: service:db
     # Uncomment the next line to use a non-root user for all processes.
     # user: vscode
 
@@ -46,25 +46,25 @@ services:
       # Ensure that the variables in .env match the same variables in devcontainer.json
       - .env
 
-  prometheus:
-    image: prom/prometheus:v2.36.2
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
-    ports:
-      - 9090:9090
+  # prometheus:
+  #   image: prom/prometheus:v2.36.2
+  #   volumes:
+  #     - ./prometheus:/etc/prometheus
+  #     - prometheus-data:/prometheus
+  #   command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - 9090:9090
 
-  grafana:
-    image: grafana/grafana
-    user: "472"
-    depends_on:
-      - prometheus
-    restart: unless-stopped
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana-data:/var/lib/grafana
-    env_file:
-      - ./grafana/config.monitoring
-    ports:
-      - 3000:3000
+  # grafana:
+  #   image: grafana/grafana
+  #   user: "472"
+  #   depends_on:
+  #     - prometheus
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./grafana/provisioning:/etc/grafana/provisioning
+  #     - grafana-data:/var/lib/grafana
+  #   env_file:
+  #     - ./grafana/config.monitoring
+  #   ports:
+  #     - 3000:3000
